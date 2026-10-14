@@ -7,13 +7,13 @@ import sys
 import os
 
 # ---------------------------
-# Ensure Airflow can find your src folder
+# Airflow src folder
 # ---------------------------
-SRC_PATH = "/opt/airflow/src"  # folder inside container where your src code is mounted
+SRC_PATH = "/opt/airflow/src"  
 if SRC_PATH not in sys.path:
     sys.path.append(SRC_PATH)
 
-# Now we can import the pipeline function safely
+# importing the pipeline function safely
 from data_cleaning import run_cleaning_pipeline
 
 # ---------------------------
