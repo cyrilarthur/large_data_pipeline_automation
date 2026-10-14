@@ -1,0 +1,306 @@
+# Tourism Data ETL Pipeline Project Documentation
+
+## Project Overview
+
+The Tourism credit card Data ETL Pipeline project was developed to automate the extraction, transformation, validation, and storage of tourism-related credit card data. The pipeline processes raw tourism credit card datasets, cleans and standardizes the data, validates data quality, detects anomalies, and generates a cleaned dataset ready for analytics and reporting.
+
+The project was implemented using Apache Airflow for workflow orchestration, Docker for containerization, and Python (Pandas) for data processing.
+
+---
+
+# Project Objectives
+
+The main objectives of the project were:
+
+* Automate tourism credit card data processing.
+* Improve data quality through cleaning and validation.
+* Detect and handle missing or inconsistent records.
+* Standardize column names and data types.
+* Generate a clean dataset for downstream analytics.
+* Schedule and monitor data processing workflows using Airflow.
+* Containerize the environment for portability and reproducibility.
+
+---
+
+# Technologies Used
+
+## Programming Language
+
+* Python
+
+## Libraries
+
+* Pandas
+* NumPy
+* Logging
+
+## Workflow Orchestration
+
+* Apache Airflow
+
+## Containerization
+
+* Docker
+* Docker Compose
+
+## Data Storage
+
+* CSV Files
+
+## Development Environment
+
+* Windows
+* VS Code
+* Command Prompt
+
+---
+
+```
+
+---
+
+# ETL Process
+
+## 1. Extract
+
+The extraction phase reads the raw tourism dataset:
+
+```python
+tourism_data.csv
+```
+
+Tasks performed:
+
+* Load CSV data.
+* Verify file existence.
+* Handle read exceptions.
+
+---
+
+## 2. Transform
+
+The transformation phase performs:
+
+### Data Cleaning
+
+* Remove duplicate records.
+* Handle missing values.
+* Trim unwanted spaces.
+* Standardize categorical values.
+
+### Data Type Conversion
+
+* Convert numerical columns.
+* Convert date columns.
+* Ensure consistent formats.
+
+### Column Standardization
+
+Example:
+
+```text
+Tourist Name
+→
+tourist_name
+```
+
+### Outlier Detection
+
+* Identify abnormal values.
+* Generate anomaly reports.
+* Improve data quality.
+
+---
+
+## 3. Validate
+
+Validation checks include:
+
+* Null value verification.
+* Duplicate record checks.
+* Data type validation.
+* Dataset consistency checks.
+
+Validation ensures that only quality data proceeds to the output stage.
+
+---
+
+## 4. Load
+
+The cleaned dataset is saved as:
+
+```text
+cleaned_tourism_data.csv
+```
+
+Output location inside Docker:
+
+```text
+/opt/airflow/data/cleaned_tourism_data.csv
+```
+
+Output location on local machine:
+
+```text
+C:\Users\cyril\Downloads\
+```
+
+using:
+
+```bash
+docker cp airflow_credit_frauds:/opt/airflow/data/cleaned_tourism_data.csv C:\Users\cyril\Downloads\
+```
+
+---
+
+# Airflow Workflow
+
+The Airflow DAG orchestrates the following tasks:
+
+1. Extract Data
+2. Clean Data
+3. Fix Data Types
+4. Standardize Columns
+5. Validate Data
+6. Detect Outliers
+7. Save Cleaned Dataset
+
+Benefits:
+
+* Automated execution
+* Task dependency management
+* Monitoring and logging
+* Retry mechanisms for failures
+
+---
+
+# Successes Achieved
+
+## Data Quality Improvement
+
+Successfully:
+
+* Removed duplicates.
+* Corrected invalid data types.
+* Standardized dataset structure.
+* Reduced inconsistencies.
+
+## Automation
+
+Successfully automated the entire ETL workflow using Airflow.
+
+## Reproducibility
+
+Docker ensured:
+
+* Consistent execution environments.
+* Easy deployment.
+* Reduced dependency conflicts.
+
+## Data Accessibility
+
+Generated a clean dataset ready for:
+
+* Data analysis
+* Dashboard creation
+* Machine learning
+* Reporting
+
+---
+
+# Issues Encountered and Solutions
+
+## Issue 1: Airflow Task Failures
+
+### Cause
+
+Incorrect task dependencies and data handling errors.
+
+### Solution
+
+* Reviewed DAG dependencies.
+* Improved error handling.
+* Added logging statements.
+
+Result:
+
+Tasks executed successfully.
+
+---
+
+## Issue 2: CSV File Not Appearing on Local Machine
+
+### Cause
+
+The file was generated inside the Docker container rather than the host machine.
+
+### Solution
+
+Located the file:
+
+```bash
+docker exec -it airflow_credit_frauds find /opt/airflow -name "*.csv"
+```
+
+Copied the file to the local system:
+
+```bash
+docker cp airflow_credit_frauds:/opt/airflow/data/cleaned_tourism_data.csv C:\Users\cyril\Downloads\
+```
+
+Result:
+
+Successfully accessed the cleaned dataset locally.
+
+---
+
+## Issue 3: Data Validation Errors
+
+### Cause
+
+Missing values and inconsistent formats in the source dataset.
+
+### Solution
+
+Implemented:
+
+* Missing value handling.
+* Data type conversion.
+* Validation checks.
+
+Result:
+
+Improved dataset integrity.
+
+---
+
+## Issue 4: Column Naming Inconsistencies
+
+### Cause
+
+Different naming conventions in source data.
+
+### Solution
+
+Implemented automatic column standardization.
+
+Example:
+
+```text
+Tourist Name
+→ tourist_name
+Visit Date
+→ visit_date
+```
+
+Result:
+
+Consistent schema across the pipeline.
+
+---
+
+# Final Outcome
+
+The Tourism ETL Pipeline successfully automated the process of extracting, cleaning, validating, and storing tourism data. The solution improved data quality, reduced manual processing effort, and produced a reliable dataset suitable for analytics, reporting, and future machine learning applications.
+
+The project demonstrates practical skills in Data Engineering, ETL development, Apache Airflow orchestration, Docker containerization, data validation, and automated workflow management.

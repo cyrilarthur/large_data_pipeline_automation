@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  airflow:
+    build: .
+    container_name: airflow_credit_frauds
+    restart: always
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+    volumes:
+      - ../dags:/opt/airflow/dags
+      - ../logs:/opt/airflow/logs
+      - ../plugins:/opt/airflow/plugins
+      - ../src:/opt/airflow/src
+      - ../data:/opt/airflow/data
+    ports:
+      - "8085:8080"   # <-- Map host port 8085 to container port 8080
+    command: >
+      bash -c "airflow db init &&
+               airflow users create --username cadmin --password maths --firstname Admin --lastname User --role Admin --email admin@example.com &&
+               airflow webserver & airflow scheduler"
